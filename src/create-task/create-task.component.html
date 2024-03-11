@@ -1,0 +1,66 @@
+<p>Создание задач</p>
+<form>
+  <mat-form-field>
+    <mat-label>загаловок</mat-label>
+    <input matInput [(ngModel)]="user.headline" name="headline" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label> название</mat-label>
+    <input matInput [(ngModel)]="user.title" name="title" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label> дедлайн</mat-label>
+    <input matInput [(ngModel)]="user.deadline" name="deadline" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>приоритет</mat-label>
+    <input matInput [(ngModel)]="user.priority" name="priority" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label> статус</mat-label>
+    <input matInput [(ngModel)]="user.status" name="status" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>исполнитель</mat-label>
+    <input matInput [(ngModel)]="user.executor" name="executor" />
+  </mat-form-field>
+</form>
+<button mat-raised-button color="accent" (click)="addTask(user)">добавить задачу</button>
+
+<!--button (click)="clearLS()">CLEARLS</button-->
+<h2>Добавленные задачи:</h2>
+<div class="task">
+  <table class="table">
+    @for (post of arr_box3;track post.id){
+    <tr>
+      <td>
+        <h5> {{post.headline}}|{{post.title}}</h5>
+      </td>
+      <td><span class="sub_task">{{post.deadline}}</span></td>
+      <td><span class="sub_task">{{post.priority}}</span></td>
+      <td>{{post.status}}</td>
+      <td>{{post.executor}}</td>
+      <td>
+        <button [class.selected]="post===selectedHero" (click)="onSelect(post)">редактирование задачи</button>
+      </td>
+      <td>
+        <a routerLink="/descr/{{post.id}}"
+          [queryParams]="{headline:post.headline, title:post.title, deadline:post.deadline,priority:post.priority,status:post.status,executor:post.executor}">детальный
+          просмотр задач</a>
+      </td>
+    </tr>
+    }
+  </table>
+</div>
+
+@if(select){ <div>
+  <mat-form-field>
+    <mat-label>статус</mat-label>
+    <input matInput [(ngModel)]="this.status" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>исполнитель</mat-label>
+    <input matInput [(ngModel)]="this.executor" />
+  </mat-form-field>
+  <button mat-raised-button color="accent" (click)="changeTask(this.status,this.executor)">сохранить изменения</button>
+</div> }

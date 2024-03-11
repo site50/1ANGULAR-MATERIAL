@@ -1,0 +1,102 @@
+<form>
+  отсортировать по исполнителям:<mat-form-field>
+    <mat-select [(ngModel)]="selectedUser" name="arr_box3">
+      @for (post of arr_box3; track post) {
+      <mat-option [value]="post.executor" (click)="show_data(post.executor)">{{post.executor}}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+</form>
+<form> отсортировать по статусу:
+  <mat-form-field>
+    <mat-select [(ngModel)]="selectedStatus" name="arr_box3">
+      @for (post of arr_box3; track post) {
+      <mat-option [value]="post.status" (click)="show_data(post.status)">{{post.status}}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+</form>
+<form> отсортировать по дате дедлайна:
+  <mat-form-field>
+    <mat-select [(ngModel)]="selectedStatus" name="arr_box3">
+      @for (post of arr_box3; track post) {
+      <mat-option [value]="post.deadline" (click)="show_data(post.deadline)">{{post.deadline}}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+</form>
+<div>
+  <table class="table">
+    @for (post of arr_user;track post.id){
+    <tr>
+      <td>{{post.headline}}</td>
+      <td>{{post.title}}</td>
+      <td>{{post.deadlline}}</td>
+      <td>{{post.title}}</td>
+      <td>{{post.deadline}}</td>
+      <td>{{post.priority}}</td>
+      <td>{{post.status}}</td>
+      <td>{{post.executor}}</td>
+    </tr>
+    }
+  </table>
+</div>
+<br>
+<br>
+<table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)"
+  class="mat-elevation-z8">
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by number">
+      No.
+    </th>
+    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="headline">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by headline">
+      заголовок
+    </th>
+    <td mat-cell *matCellDef="let element"> {{element.headline}} </td>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="title">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by title">
+      название
+    </th>
+    <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="deadline">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by deadline">
+      дедлайн
+    </th>
+    <td mat-cell *matCellDef="let element"> {{element.deadline}} </td>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="priority">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by priority">
+      приоритет
+    </th>
+    <td mat-cell *matCellDef="let element"> {{element.priority}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="status">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by status">
+      статус
+    </th>
+    <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="executor">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by executor">
+      исполнитель
+    </th>
+    <td mat-cell *matCellDef="let element"> {{element.executor}} </td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
